@@ -44,6 +44,7 @@ const onTimerCount = () => {
 
     const { days, hours, minutes, seconds } = convertMs(delta);
     console.log(`${days}:${hours}:${minutes}:${seconds}`);
+    clockInterface({ days, hours, minutes, seconds });
   }, 1000);
 };
 
@@ -76,4 +77,17 @@ console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
+}
+
+const valueDays = document.querySelector('[data-days]');
+const valueHours = document.querySelector('[data-hours]');
+const valueMin = document.querySelector('[data-minutes]');
+const valueSec = document.querySelector('[data-seconds]');
+
+const timerInterface = document.querySelector('.timer');
+function clockInterface({ days, hours, minutes, seconds }) {
+  valueDays.innerText = days;
+  valueHours.innerText = hours;
+  valueMin.innerText = minutes;
+  valueSec.innerText = seconds;
 }
