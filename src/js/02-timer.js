@@ -26,7 +26,7 @@ document.querySelector('#datetime-picker').flatpickr({
       btnStart.disabled = false;
     } else {
       btnStart.disabled = true;
-      Notify.failure('Please choose a date in the future');
+      Notify.failure('Please, choose a date in the future');
       npm
       // window.alert('Please choose a date in the future');
     }
