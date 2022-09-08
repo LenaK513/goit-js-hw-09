@@ -4,18 +4,18 @@ const form = document.querySelector('.form');
 
 form.addEventListener('submit', onFormSubmit);
 
-let delayTime;
-let step;
-let amount;
+let delayTime = null;
+let step = null;
+let amount = null;
 
 function onFormSubmit(event) {
   event.preventDefault();
-  delayTime = form.elements.delay.value;
-  step = form.elements.step.value;
-  amount = form.elements.amount.value;
-  // console.log(delayTime);
-  // console.log(step);
-  // console.log(amount);
+  delayTime = Number(form.elements.delay.value);
+  step = Number(form.elements.step.value);
+  amount = Number(form.elements.amount.value);
+  console.log(delayTime);
+  console.log(step);
+  console.log(amount);
 
   for (let index = 1; index <= amount; index += 1) {
     createPromise(index, delayTime)
@@ -25,7 +25,7 @@ function onFormSubmit(event) {
       .catch(({ position, delay }) => {
         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
-    delayTime += step;
+    console.log((delayTime = delayTime + step));
   }
 
   function createPromise(position, delay) {
