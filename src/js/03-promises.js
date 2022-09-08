@@ -4,6 +4,10 @@ const form = document.querySelector('.form');
 
 form.addEventListener('submit', onFormSubmit);
 
+let delayTime;
+let step;
+let amount;
+
 function onFormSubmit(event) {
   event.preventDefault();
   delayTime = form.elements.delay.value;
