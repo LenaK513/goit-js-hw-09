@@ -9,31 +9,9 @@ function onFormSubmit(event) {
   delay = form.elements.delay.value;
   step = form.elements.step.value;
   amount = form.elements.amount.value;
+  console.log(delay)
+  console.log(step)
+  console.log(amount)
 
 
-for (let index = 1; index < amount; index +=1) {
-  
-  function createPromise(index, delay) {
-    return new Promise((resolve, reject)=>{
-      const shouldResolve = Math.random() > 0.3;
-    setTimeout((delay) => {
-      if (shouldResolve) {
-        Notify.success(`✔ Fulfilled promise ${index} in ${delay}ms`)
-    } else {
-      Notify.failure(`✖ Rejected promise ${index} in ${delay}ms`)
-    }
-    }, delay);
 
-    delay +=step;
-   
-    }) 
-  }
-
-}
-createPromise({position, delay})
-  .then(({ position, delay }) => {
-    console.log(`✔ Fulfilled promise ${position} in ${delay}ms`);
-  })
-  .catch(({ position, delay }) => {
-    console.log(`✖ Rejected promise ${position} in ${delay}ms`);
-  });
