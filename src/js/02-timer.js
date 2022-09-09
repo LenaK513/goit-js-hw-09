@@ -2,7 +2,14 @@ import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 
 import 'flatpickr/dist/flatpickr.min.css';
-import { Notify } from 'notiflix/build/notiflix-notify-aio'
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+const valueDays = document.querySelector('[data-days]');
+const valueHours = document.querySelector('[data-hours]');
+const valueMin = document.querySelector('[data-minutes]');
+const valueSec = document.querySelector('[data-seconds]');
+const inputFp = document.querySelector('#datetime-picker');
+const btnStart = document.querySelector('[data-start]');
 
 const options = {
   enableTime: true,
@@ -13,36 +20,39 @@ const options = {
     console.log(selectedDates[0]);
   },
 };
-console.log(options.defaultDate);
-let fp = flatpickr('#datetime-picker', { options });
-console.log(fp);
-let input = document.querySelector('#datetime-picker');
+// console.log(options.defaultDate);
+let fp = flatpickr(inputFp, options);
+// console.log(fp);
+
 // console.log(input);
-const btnStart = document.querySelector('[data-start]');
+
 btnStart.disabled = true;
-document.querySelector('#datetime-picker').flatpickr({
+inputFp.flatpickr({
   onClose: function (selectedDates) {
     if (selectedDates[0] > options.defaultDate.fp_incr(-1)) {
       btnStart.disabled = false;
     } else {
       btnStart.disabled = true;
       Notify.failure('Please, choose a date in the future');
-      npm
+      npm;
       // window.alert('Please choose a date in the future');
     }
     console.log(selectedDates[0]);
   },
 });
 
+let timerId = null;
 const onTimerCount = () => {
-  setInterval(() => {
-    const currentDate = new Date();
-    const inputDate = new Date(
-      document.getElementById('datetime-picker').value
-    ).getTime();
+  timerId = setInterval(() => {
+    let currentDate = new Date();
+    console.log(currentDate);
+    let inputDate = new Date(inputFp.value).getTime();
+    console.log(timerId);
 
-    const delta = inputDate - currentDate;
-    // // console.log(options.selectedDates[0]);
+    let delta = inputDate - currentDate;
+    if (delta <= 1000) {
+      clearInterval(onTimerCount);
+    }
     console.log(delta);
 
     const { days, hours, minutes, seconds } = convertMs(delta);
@@ -82,12 +92,7 @@ function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 
-const valueDays = document.querySelector('[data-days]');
-const valueHours = document.querySelector('[data-hours]');
-const valueMin = document.querySelector('[data-minutes]');
-const valueSec = document.querySelector('[data-seconds]');
-
-const timerInterface = document.querySelector('.timer');
+// const timerInterface = document.querySelector('.timer');
 function clockInterface({ days, hours, minutes, seconds }) {
   valueDays.innerText = days;
   valueHours.innerText = hours;
