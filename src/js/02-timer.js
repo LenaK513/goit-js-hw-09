@@ -51,7 +51,8 @@ const onTimerCount = () => {
 
     let delta = inputDate - currentDate;
     if (delta <= 1000) {
-      clearInterval(onTimerCount);
+      delta = 0;
+      clearInterval(timerId);
     }
     console.log(delta);
 
