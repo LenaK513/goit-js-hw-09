@@ -21,7 +21,7 @@ const options = {
   },
 };
 // console.log(options.defaultDate);
-let fp = flatpickr(inputFp, options);
+// let fp = flatpickr(inputFp, options);
 // console.log(fp);
 
 // console.log(input);
@@ -34,7 +34,7 @@ inputFp.flatpickr({
     } else {
       btnStart.disabled = true;
       Notify.failure('Please, choose a date in the future');
-      npm;
+
       // window.alert('Please choose a date in the future');
     }
     console.log(selectedDates[0]);
@@ -47,7 +47,6 @@ const onTimerCount = () => {
     let currentDate = new Date();
     console.log(currentDate);
     let inputDate = new Date(inputFp.value).getTime();
-    console.log(timerId);
 
     let delta = inputDate - currentDate;
     if (delta <= 1000) {
