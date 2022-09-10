@@ -17,30 +17,23 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
+    console.log(`${selectedDates[0]}`);
+
+    if (selectedDates[0].getTime() < options.defaultDate.fp_incr(1).getTime()) {
+      console.log(options.defaultDate.fp_incr(1));
+
+      Notify.failure('Please, choose a date in the future');
+    } else {
+      btnStart.disabled = false;
+    }
   },
 };
-// console.log(options.defaultDate);
-// let fp = flatpickr(inputFp, options);
-// console.log(fp);
 
-// console.log(input);
+let fp = flatpickr(inputFp, options);
+console.log(fp);
 
+fp.close();
 btnStart.disabled = true;
-inputFp.flatpickr({
-  onClose: function (selectedDates) {
-    if (selectedDates[0] > options.defaultDate.fp_incr(-1)) {
-      btnStart.disabled = false;
-    } else {
-      btnStart.disabled = true;
-      Notify.failure('Please, choose a date in the future');
-
-      // window.alert('Please choose a date in the future');
-    }
-    console.log(selectedDates[0]);
-  },
-});
-
 let timerId = null;
 const onTimerCount = () => {
   timerId = setInterval(() => {
@@ -49,11 +42,12 @@ const onTimerCount = () => {
     let inputDate = new Date(inputFp.value).getTime();
 
     let delta = inputDate - currentDate;
-    if (delta <= 1000) {
-      delta = 0;
+    if (delta > 1000) {
+      btnStart.disabled = true;
+    } else {
+      if (delta <= 1000) delta = 0;
       clearInterval(timerId);
     }
-    console.log(delta);
 
     const { days, hours, minutes, seconds } = convertMs(delta);
     console.log(`${days}:${hours}:${minutes}:${seconds}`);
