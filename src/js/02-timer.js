@@ -29,10 +29,10 @@ const options = {
   },
 };
 
-let fp = flatpickr(inputFp, options);
-console.log(fp);
+flatpickr(inputFp, options);
+// console.log(fp);
 
-fp.close();
+// fp.close();
 btnStart.disabled = true;
 let timerId = null;
 const onTimerCount = () => {
