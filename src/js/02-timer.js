@@ -20,7 +20,7 @@ const options = {
     console.log(`${selectedDates[0]}`);
 
     if (selectedDates[0].getTime() < options.defaultDate.fp_incr(1).getTime()) {
-      console.log(options.defaultDate.fp_incr(1));
+      // console.log(options.defaultDate.fp_incr(1));
 
       Notify.failure('Please, choose a date in the future');
     } else {
@@ -38,7 +38,7 @@ let timerId = null;
 const onTimerCount = () => {
   timerId = setInterval(() => {
     let currentDate = new Date();
-    console.log(currentDate);
+    // console.log(currentDate);
     let inputDate = new Date(inputFp.value).getTime();
 
     let delta = inputDate - currentDate;
