@@ -36,17 +36,17 @@ flatpickr(inputFp, options);
 btnStart.disabled = true;
 let timerId = null;
 const onTimerCount = () => {
+  btnStart.disabled = true;
+  inputFp.disabled = true;
   timerId = setInterval(() => {
     let currentDate = new Date();
     // console.log(currentDate);
     let inputDate = new Date(inputFp.value).getTime();
 
     let delta = inputDate - currentDate;
-    if (delta > 1000) {
-      btnStart.disabled = true;
-      inputFp.disabled = true;
-    } else {
-      if (delta <= 1000) delta = 0;
+
+    if (delta <= 1000) {
+      delta = 0;
       clearInterval(timerId);
     }
 
