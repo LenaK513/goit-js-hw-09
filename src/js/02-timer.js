@@ -19,7 +19,7 @@ const options = {
   onClose(selectedDates) {
     console.log(`${selectedDates[0]}`);
 
-    if (selectedDates[0].getTime() < options.defaultDate.fp_incr(1).getTime()) {
+    if (selectedDates[0].getTime() < Date.now()) {
       // console.log(options.defaultDate.fp_incr(1));
 
       Notify.failure('Please, choose a date in the future');
@@ -44,6 +44,7 @@ const onTimerCount = () => {
     let delta = inputDate - currentDate;
     if (delta > 1000) {
       btnStart.disabled = true;
+      inputFp.disabled = true;
     } else {
       if (delta <= 1000) delta = 0;
       clearInterval(timerId);
